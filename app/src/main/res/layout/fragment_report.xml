@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.report.ReportFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/devicesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtStartDate"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:background="@drawable/border_layer_list"
+        android:hint="Start Date"
+        android:paddingEnd="8dp"
+        android:drawableEnd="@drawable/ic_baseline_date_range_24"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtEndDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devicesRecyclerView" />
+
+    <TextView
+        android:id="@+id/txtEndDate"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:background="@drawable/border_layer_list"
+        android:hint="End Date"
+        android:paddingEnd="8dp"
+        android:drawableEnd="@drawable/ic_baseline_date_range_24"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtStartDate"
+        app:layout_constraintTop_toTopOf="@+id/txtStartDate" />
+
+    <Button
+        android:id="@+id/btnGenerate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/generate"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnLastWeek"
+        app:layout_constraintStart_toEndOf="@+id/btnLastMonth"
+        app:layout_constraintTop_toBottomOf="@+id/txtStartDate" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/button_bg"
+        android:stretchColumns="1,2,3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGenerate">
+
+        <TableRow>
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="MacId"
+                android:ems="6"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="Username"
+                android:textStyle="bold"
+                android:layout_marginStart="24dp"
+
+                />
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_column="1"
+                android:gravity="center"
+                android:text="Consumption"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                />
+
+<!--            <TextView-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_column="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="Rssi"-->
+<!--                android:textStyle="bold"-->
+
+<!--                />-->
+        </TableRow>
+
+
+    </TableLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTableView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Graph"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGenerate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnGenerate"
+        app:layout_constraintTop_toTopOf="@+id/btnGenerate" />
+
+    <Button
+        android:id="@+id/btnLastMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Last Month"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGenerate"
+        app:layout_constraintEnd_toStartOf="@+id/btnGenerate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnGenerate" />
+
+    <Button
+        android:id="@+id/btnLastWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Last Week"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGenerate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnGenerate"
+        app:layout_constraintTop_toTopOf="@+id/btnGenerate" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_devices">
+
+    <fragment
+        android:id="@+id/nav_devices"
+        android:name="com.embeltech.meterreading.ui.device.DeviceDetailsFragment"
+        android:label="@string/menu_devices"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_report"
+        android:name="com.embeltech.meterreading.ui.report.ReportFragment"
+        android:label="@string/menu_report"
+        tools:layout="@layout/fragment_report" />
+
+    <fragment
+        android:id="@+id/nav_add_user"
+        android:name="com.embeltech.meterreading.ui.adduser.AddUserFragment"
+        android:label="@string/addUser"
+        tools:layout="@layout/add_user_fragment" />
+
+    <fragment
+        android:id="@+id/nav_billing"
+        android:name="com.embeltech.meterreading.ui.billing.BillingFragment"
+        android:label="@string/billing"
+        tools:layout="@layout/fragment_billing" />
+
+    <fragment
+        android:id="@+id/nav_statistics"
+        android:name="com.embeltech.meterreading.ui.statistics.GraphFragment"
+        android:label="@string/contactUs"
+        tools:layout="@layout/graph_fragment" />
+
+    <activity
+        android:id="@+id/nav_logout"
+        android:name="com.embeltech.meterreading.ui.report.StatActivity"
+        android:label="Logout"
+        tools:layout="@layout/activity_stat" />
+
+
+</navigation>
