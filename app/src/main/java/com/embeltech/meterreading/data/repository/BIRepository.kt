@@ -8,10 +8,7 @@ import com.embeltech.meterreading.injection.annotations.Remote
 import com.embeltech.meterreading.ui.adduser.SignUpRequest
 import com.embeltech.meterreading.ui.billing.model.DeviceDataDetail
 import com.embeltech.meterreading.ui.billing.model.DeviceDetailsResponse
-import com.embeltech.meterreading.ui.device.model.Admin
-import com.embeltech.meterreading.ui.device.model.Device
-import com.embeltech.meterreading.ui.device.model.DeviceListResponse
-import com.embeltech.meterreading.ui.device.model.User
+import com.embeltech.meterreading.ui.device.model.*
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
 import com.embeltech.meterreading.ui.device.model.stat_model.TotalConsumptionResponse
 import com.embeltech.meterreading.ui.login.model.LoginResponse
@@ -89,7 +86,7 @@ class BIRepository @Inject constructor(
         )
     }
 
-    override fun createDevice(token: String, request: Device): Observable<String> {
+    override fun createDevice(token: String, request: Device): Observable<SaveDeviceResponse> {
         return remoteDataSource.createDevice(token, request)
     }
 

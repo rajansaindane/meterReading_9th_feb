@@ -4,10 +4,7 @@ import com.embeltech.meterreading.data.database.model.MeterBeacon
 import com.embeltech.meterreading.ui.adduser.SignUpRequest
 import com.embeltech.meterreading.ui.billing.model.DeviceDataDetail
 import com.embeltech.meterreading.ui.billing.model.DeviceDetailsResponse
-import com.embeltech.meterreading.ui.device.model.Admin
-import com.embeltech.meterreading.ui.device.model.Device
-import com.embeltech.meterreading.ui.device.model.DeviceListResponse
-import com.embeltech.meterreading.ui.device.model.User
+import com.embeltech.meterreading.ui.device.model.*
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
 import com.embeltech.meterreading.ui.device.model.stat_model.TotalConsumptionResponse
 import com.embeltech.meterreading.ui.login.model.LoginResponse
@@ -56,7 +53,7 @@ interface BIDataSource {
     fun login(email: String, password: String): Observable<LoginResponse>
     fun getUserList(token: String, userId: Long, role: String): Observable<List<User>>
     fun getAdminList(token: String, userId: Long, userRole: String): Observable<List<Admin>>
-    fun createDevice(token: String, request: Device): Observable<String>
+    fun createDevice(token: String, request: Device): Observable<SaveDeviceResponse>
     fun getDeviceList(
         token: String,
         fkUserId: Long,

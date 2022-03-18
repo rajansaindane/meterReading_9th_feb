@@ -7,10 +7,7 @@ import com.embeltech.meterreading.data.repository.BIDataSource
 import com.embeltech.meterreading.ui.adduser.SignUpRequest
 import com.embeltech.meterreading.ui.billing.model.DeviceDataDetail
 import com.embeltech.meterreading.ui.billing.model.DeviceDetailsResponse
-import com.embeltech.meterreading.ui.device.model.Admin
-import com.embeltech.meterreading.ui.device.model.Device
-import com.embeltech.meterreading.ui.device.model.DeviceListResponse
-import com.embeltech.meterreading.ui.device.model.User
+import com.embeltech.meterreading.ui.device.model.*
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
 import com.embeltech.meterreading.ui.device.model.stat_model.TotalConsumptionResponse
 import com.embeltech.meterreading.ui.login.model.LoginResponse
@@ -86,7 +83,7 @@ class BIRemoteDataSource @Inject constructor(private var bIService: BIService) :
         return bIService.getAdminList(token)
     }
 
-    override fun createDevice(token: String, request: Device): Observable<String> {
+    override fun createDevice(token: String, request: Device): Observable<SaveDeviceResponse> {
         return bIService.createDevice(token, request)
     }
 

@@ -105,6 +105,7 @@ class ScanBeaconActivity : BaseActivity() {
       //  Utility.showLoadingDialog(this,"Scanning ...")
         Log.i("@scan","service called===>")
         RxBus.subscribe(RxBus.SUBJECT_SCANNED_BEACON_SELECTED, this) {
+            Log.i("@scan","becon selected===>")
             if (it is MeterBeacon) {
                 val stringBuilder = StringBuilder()
                 Log.i("@scan","receiving===>")
@@ -145,12 +146,15 @@ class ScanBeaconActivity : BaseActivity() {
                 saveBeaconData(meterBeacon,"hex","convertedString")
                 Log.i("@scan","set data===>"+Gson().toJson(meterBeacon))
 
+          }
+            else{
+                Log.i("@scan","else condition====>"+it.toString())
             }
            // hideProgressDialog()
-        }
+          }
 
 
-    }
+   }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveBeaconData(
@@ -188,21 +192,21 @@ class ScanBeaconActivity : BaseActivity() {
     }
 
     private fun setBeaconListToUI(it: List<MeterBeacon>?) {
-        val beaconList: ArrayList<MeterBeacon> = ArrayList()
-        Log.i("@Scan","meterbecon=====>"+it.toString())
-        if (it!!.isNotEmpty()) {
-            if (deviceList.isNotEmpty()) {
-                Log.i("@Scan","deviceList=====>"+deviceList.toString())
-                for (i in it.indices)
-                    for (j in deviceList.indices) {
-                        if (it[i].beaconMacId.equals(deviceList[j].deviceMACId, false)) {
-                            beaconList.add(it[i])
-                        }
-                    }
-            }
-        }
-        if (beaconList.isNotEmpty())
-            scanBeaconRecyclerView.adapter = ScannedBeaconAdapter(this, beaconList)
+////        val beaconList: ArrayList<MeterBeacon> = ArrayList()
+////        Log.i("@Scan","meterbecon=====>"+it.toString())
+////        if (it!!.isNotEmpty()) {
+////            if (deviceList.isNotEmpty()) {
+//                Log.i("@Scan","deviceList=====>"+deviceList.toString())
+//                for (i in it.indices)
+//                    for (j in deviceList.indices) {
+//                        if (it[i].beaconMacId.equals(deviceList[j].deviceMACId, false)) {
+//                            beaconList.add(it[i])
+//                        }
+//                    }
+//            }
+//        }
+//        if (beaconList.isNotEmpty())
+            scanBeaconRecyclerView.adapter = ScannedBeaconAdapter(this, it)
     }
 
     private fun handleStatus(it: Status?) {

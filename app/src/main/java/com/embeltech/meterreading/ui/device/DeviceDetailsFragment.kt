@@ -23,10 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.embeltech.meterreading.R
 import com.embeltech.meterreading.config.BaseFragment
 import com.embeltech.meterreading.config.Constants
-import com.embeltech.meterreading.livedata.GetStatisticDataResponse
-import com.embeltech.meterreading.livedata.SaveTotalConsumption
-import com.embeltech.meterreading.livedata.ShowProgressDialog
-import com.embeltech.meterreading.livedata.Status
+import com.embeltech.meterreading.livedata.*
 import com.embeltech.meterreading.ui.device.adapter.DeviceAdapter
 import com.embeltech.meterreading.ui.device.model.DeviceListResponse
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
@@ -272,7 +269,7 @@ class DeviceDetailsFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-       // deviceDetailsViewModel.getAllDevices()
+        deviceDetailsViewModel.getAllDevices()
     }
 
 //    private fun updateListData(selectedUser: String) {
@@ -360,9 +357,13 @@ class DeviceDetailsFragment : BaseFragment() {
                 txtConsumption!!.text = "Total Consumption : "+it.totalConsumption.lTotalConsumption.toString()+"Ltr"
                 showPieChart(it.totalConsumption)
             }
-//            is DeviceList -> {
-//                setListToAdapter(it.list as ArrayList<DeviceListResponse>)
-//            }
+            is DeviceList -> {
+                for(item in it.list){
+
+                    Log.i("@Device","device list =====>"+item.toString())
+                }
+                setListToAdapter(it.list as ArrayList<DeviceListResponse>)
+            }
 //            is GetUserList -> updateView(it.users)
 //            else -> {
 //            }
@@ -388,16 +389,16 @@ class DeviceDetailsFragment : BaseFragment() {
 //        }
 //    }
 
-//    private fun setListToAdapter(list: ArrayList<DeviceListResponse>) {
-//        deviceList = list
-//        val newList = ArrayList<DeviceListResponse>()
-//        for (i in deviceList.indices) {
-//            if (deviceList[i].deviceTypeAmrOrBle.equals("ble", true))
-//                newList.add(deviceList[i])
-//        }
-//        deviceAdapter = DeviceAdapter(requireActivity(), newList, appPreferences.getUserRole()!!)
+    private fun setListToAdapter(list: ArrayList<DeviceListResponse>) {
+        deviceList = list
+        val newList = ArrayList<DeviceListResponse>()
+        for (i in deviceList.indices) {
+            if (deviceList[i].deviceTypeAmrOrBle.equals("ble", true))
+                newList.add(deviceList[i])
+        }
+        deviceAdapter = DeviceAdapter(requireActivity(), newList, appPreferences.getUserRole()!!)
 //        deviceRecyclerView.adapter = deviceAdapter
-//    }
+    }
 
     private fun showBarChart(statisticResponseData: List<StatisticResponsesItem>) {
         val entries: ArrayList<BarEntry> = ArrayList()

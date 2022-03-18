@@ -1,5 +1,6 @@
 package com.embeltech.meterreading.ui.device
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.embeltech.meterreading.config.Constants
 import com.embeltech.meterreading.data.preferences.AppPreferences
@@ -69,10 +70,13 @@ class CreateDeviceViewModel @Inject constructor(private val repository: BIReposi
             .subscribe({
                 status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
 //                status.value = DeviceSavedSuccessfully
+                Log.i("@Create","response===>"+it.present)
                 saveDataToDatabase(request)
             }, {
                 status.value = Failed(it.message!!)
                 status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+                Log.i("@Create","error esponse===>"+it.toString())
+
             }).addToCompositeDisposable(disposable)
     }
 

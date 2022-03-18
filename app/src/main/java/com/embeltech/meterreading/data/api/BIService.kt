@@ -3,10 +3,7 @@ package com.embeltech.meterreading.data.api
 import com.embeltech.meterreading.ui.adduser.SignUpRequest
 import com.embeltech.meterreading.ui.billing.model.DeviceDataDetail
 import com.embeltech.meterreading.ui.billing.model.DeviceDetailsResponse
-import com.embeltech.meterreading.ui.device.model.Admin
-import com.embeltech.meterreading.ui.device.model.Device
-import com.embeltech.meterreading.ui.device.model.DeviceListResponse
-import com.embeltech.meterreading.ui.device.model.User
+import com.embeltech.meterreading.ui.device.model.*
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
 import com.embeltech.meterreading.ui.device.model.stat_model.TotalConsumptionResponse
 import com.embeltech.meterreading.ui.login.model.LoginResponse
@@ -38,7 +35,7 @@ interface BIService {
     fun createDevice(
         @Header("Authorization") accessToken: String,
         @Body request: Device
-    ): Observable<String>
+    ): Observable<SaveDeviceResponse>
 
     @GET("device/get-user-list")
     fun getUserList(
