@@ -157,7 +157,7 @@ class BILocalDataSource @Inject constructor(var dao: BeaconsDao) : BIDataSource 
         TODO("Not yet implemented")
     }
 
-    override fun saveBeaconData(token: String, beaconPayloads: List<BeaconPayload>): Observable<String> {
+    override fun saveBeaconData(token: String, beaconPayloads: BeaconPayload): Observable<String> {
         TODO("Not yet implemented")
     }
 

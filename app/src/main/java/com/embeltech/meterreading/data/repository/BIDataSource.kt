@@ -93,7 +93,7 @@ interface BIDataSource {
                            ) : Observable<List<ReportResponseItem>>
 
     fun saveBeaconData(token: String,
-                      beaconPayloads: List<BeaconPayload>
+                      beaconPayloads: BeaconPayload
     ) : Observable<String>
 
     fun getStatisticData(token: String,

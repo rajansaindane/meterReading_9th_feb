@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.embeltech.meterreading.data.Config
 import com.embeltech.meterreading.data.database.model.MeterBeacon
 import com.embeltech.meterreading.ui.device.model.Device
 
@@ -30,6 +31,10 @@ abstract class MeterReadingDB : RoomDatabase() {
 class Migration1To2 : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
         //database.execSQL("CREATE TABLE IF NOT EXISTS ${Config.REMINDER_ALARM_TABLE_NAME} (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `reminderID` INTEGER, `isFired` INTEGER NOT NULL DEFAULT 0, FOREIGN KEY(`reminderID`) REFERENCES ${Config.REMINDER_TABLE_NAME} (`id`) ON UPDATE CASCADE ON DELETE CASCADE )")
+       // database.execSQL("ALTER TABLE ${Config.BEACON_TABLE_NAME} ADD `share_status` INTEGER DEFAULT 0 NOT NULL")
+           database.execSQL("CREATE TABLE IF NOT EXISTS ${Config.BEACON_TABLE_NAME} (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL )")
+          // database.execSQL("CREATE UNIQUE INDEX index_tyre_detection_event_tag_id ON ${Config.TYRE_DETECTION_EVENT_TABLE_NAME} (`tag_id`)")
+           //database.execSQL("ALTER TABLE ${Config.REMINDER_TABLE_NAME} ADD `is_reminder_fired` INTEGER DEFAULT 0 NOT NULL")
     }
 }
 

@@ -127,7 +127,7 @@ interface BIService {
     @POST("BlePayload")
     fun saveBeaconData(
         @Header("Authorization") accessToken: String,
-        @Body beaconPayloads: List<BeaconPayload>
+        @Body beaconPayloads: BeaconPayload
     ): Observable<String>
     //get-Blepayload_report_for_current_date
     @GET("BlePayload/get-blepayload-report-between-two-date-for-filter")

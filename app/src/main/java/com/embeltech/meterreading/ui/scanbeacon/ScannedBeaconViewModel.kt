@@ -178,15 +178,17 @@ class ScannedBeaconViewModel @Inject constructor(private val repository: BIRepos
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .doOnSuccess {
+                Log.i("@scan","local=====>"+it.toString())
                 status.value = GetAllDeviceListFromDB(it)
             }
             .doOnError {
+                Log.i("@scan","error local=====>"+it.toString())
                 status.value = Failed(it.message!!)
             }
             .subscribe()
     }
 
-    fun saveBeaconData(requests: List<BeaconPayload>) {
+    fun saveBeaconData(requests: BeaconPayload) {
         repository.saveBeaconData(appPreferences.getToken()!!, requests)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -198,10 +200,13 @@ class ScannedBeaconViewModel @Inject constructor(private val repository: BIRepos
 
             }, {
                 Log.i("@status", "fail ===>${it.message}")
+                Log.i("@status", "fail ===>${it.toString()}")
                 Log.i("@status", "fail ===>${appPreferences.getToken()!!}")
 
                 status.value = Failed(it.message!!)
                 status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
             }).addToCompositeDisposable(disposable)
     }
+
+
 }

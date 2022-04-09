@@ -176,7 +176,7 @@ class BIRepository @Inject constructor(
        return remoteDataSource.getReportData(token,fromDate, toDate, fkUserId, role)
     }
 
-    override fun saveBeaconData(token: String, beaconPayloads: List<BeaconPayload>): Observable<String> {
+    override fun saveBeaconData(token: String, beaconPayloads: BeaconPayload): Observable<String> {
         return remoteDataSource.saveBeaconData(token,beaconPayloads)
     }
 

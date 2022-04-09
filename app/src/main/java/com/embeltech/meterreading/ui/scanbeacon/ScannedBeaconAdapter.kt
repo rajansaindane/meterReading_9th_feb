@@ -37,13 +37,14 @@ class ScannedBeaconAdapter(
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val beacon = scannedBeacons!![position]
-
+        RxBus.publish(RxBus.SUBJECT_SCANNED_BEACON_SELECTED, beacon)
         if (holder is ScannedBeaconVH) {
             holder.txtBeaconName.text = beacon.beaconName
             holder.txtBeaconMacId.text = beacon.beaconMacId
 
             holder.linearBeacon.setOnClickListener {
-                RxBus.publish(RxBus.SUBJECT_SCANNED_BEACON_SELECTED, beacon)
+            RxBus.publish(RxBus.SUBJECT_SCANNED_BEACON_SELECTED, beacon)
+
             }
         }
     }

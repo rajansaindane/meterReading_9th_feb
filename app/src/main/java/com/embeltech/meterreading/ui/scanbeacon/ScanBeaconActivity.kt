@@ -111,7 +111,7 @@ class ScanBeaconActivity : BaseActivity() {
                 Log.i("@scan","receiving===>")
 
                 val hex = Utility.byteArrayToHexString(it.byteArray!!)
-              //  val hex =  "0201041AFF59000215454D422D310100DE60B464000020001D240000F604000000000000000000000000"
+//                val hex =  "0201041AFF59000215454D422D310100DE60B464000020001D240000F604000000000000000000000000"
                 Log.i("@scan","data===>"+getConvertedString(hex))
                 //0201041AFF5 9 0 0 0 2 1 5 4 5 4 D 4 2 2 D 3 1 0 1 0 0 6 0 B 4 6 4 0 0 0 0 2 0 0 0 1 D 2 4 0 0 0 0 F 6 0 4
                 //0123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657
@@ -176,26 +176,26 @@ class ScanBeaconActivity : BaseActivity() {
             request.date = dateFormat.format(Date())
             request.time = timeFormat.format(Date()).replace(".","")
 
-//        request.beaconNname = "Beacon_13"
-//        request.macAddress = "12345"
-//        request.meterReading = "1211"
-//        request.serialNumber = "S124"
-//        request.pluseCount = "24822"
+//        request.beaconNname = "Beacon_14"
+//        request.macAddress = "EA:74:A5:78:A8:7A"
+//        request.meterReading = "783"
+//        request.serialNumber = "536878368"
+//        request.pluseCount = "783"
 //        request.rssi = "RSSI_TEST1"
-//        request.batteryPercentage = "100"
+//        request.batteryPercentage = "88"
 //        request.date = dateFormat.format(Date())
 //        request.time = timeFormat.format(Date()).replace(".","")
         Log.i("@Scan", "BeaconData====>"+Gson().toJson(request))
-        requests.add(request)
-        scannedBeaconViewModel.saveBeaconData(requests)
+//        requests.add(request)
+        scannedBeaconViewModel.saveBeaconData(request)
 
     }
 
     private fun setBeaconListToUI(it: List<MeterBeacon>?) {
-////        val beaconList: ArrayList<MeterBeacon> = ArrayList()
-////        Log.i("@Scan","meterbecon=====>"+it.toString())
-////        if (it!!.isNotEmpty()) {
-////            if (deviceList.isNotEmpty()) {
+//        val beaconList: ArrayList<MeterBeacon> = ArrayList()
+//        Log.i("@Scan","meterbecon=====>"+it.toString())
+//        if (it!!.isNotEmpty()) {
+//            if (deviceList.isNotEmpty()) {
 //                Log.i("@Scan","deviceList=====>"+deviceList.toString())
 //                for (i in it.indices)
 //                    for (j in deviceList.indices) {
