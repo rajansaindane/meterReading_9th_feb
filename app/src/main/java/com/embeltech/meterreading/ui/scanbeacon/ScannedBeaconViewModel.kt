@@ -173,7 +173,31 @@ class ScannedBeaconViewModel @Inject constructor(private val repository: BIRepos
         }
     }
 
+    fun getAllLiveDevices() {
+        repository.getDeviceList(
+            appPreferences.getToken()!!,
+            appPreferences.getUserId(),
+            appPreferences.getUserRole()!!
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { status.value = ShowProgressDialog(Constants.Progress.SHOW_PROGRESS) }
+            .subscribe({
+                status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+                if (it.isNotEmpty()) {
+                    Log.i("@scan","serialized data ===>"+it)
+                    status.value = DeviceList(it)
+                } else {
+                    status.value = Failed("Data not available")
+                }
+            }, {
+                status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+                status.value = Failed(it.message!!)
+            }).addToCompositeDisposable(disposable)
+    }
+
+
     fun getAllDevices() {
+
         repository.getAllDevices()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

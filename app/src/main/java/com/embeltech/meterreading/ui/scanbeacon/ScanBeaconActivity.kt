@@ -19,7 +19,9 @@ import com.embeltech.meterreading.config.Constants.Permission.GPS_ENABLE_REQUEST
 import com.embeltech.meterreading.data.database.model.MeterBeacon
 import com.embeltech.meterreading.eventbus.RxBus
 import com.embeltech.meterreading.livedata.*
+import com.embeltech.meterreading.ui.device.DeviceDetailsViewModel
 import com.embeltech.meterreading.ui.device.model.Device
+import com.embeltech.meterreading.ui.device.model.DeviceListResponse
 import com.embeltech.meterreading.ui.home.HomeActivity
 import com.embeltech.meterreading.ui.scanbeacon.model.BeaconPayload
 import com.embeltech.meterreading.utils.DialogUtils
@@ -42,9 +44,12 @@ class ScanBeaconActivity : BaseActivity() {
 
     private lateinit var scannedBeaconViewModel: ScannedBeaconViewModel
 
+    private lateinit var deviceDetailsViewmodel: DeviceDetailsViewModel
+
     private var snackbar: Snackbar? = null
     private lateinit var selectedBeacon: MeterBeacon
     private var deviceList: List<Device> = ArrayList()
+    private var deviceListResponse: List<DeviceListResponse> = ArrayList()
     private val requests : List<BeaconPayload> = ArrayList()
 
 
@@ -60,8 +65,8 @@ class ScanBeaconActivity : BaseActivity() {
         scannedBeaconViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(ScannedBeaconViewModel::class.java)
 
-        scannedBeaconViewModel.getAllDevices()
-
+       // scannedBeaconViewModel.getAllDevices()
+        scannedBeaconViewModel.getAllLiveDevices()
         scannedBeaconViewModel.getStatus().observe(this, {
             handleStatus(it)
         })
@@ -192,21 +197,24 @@ class ScanBeaconActivity : BaseActivity() {
     }
 
     private fun setBeaconListToUI(it: List<MeterBeacon>?) {
-//        val beaconList: ArrayList<MeterBeacon> = ArrayList()
-//        Log.i("@Scan","meterbecon=====>"+it.toString())
-//        if (it!!.isNotEmpty()) {
-//            if (deviceList.isNotEmpty()) {
-//                Log.i("@Scan","deviceList=====>"+deviceList.toString())
-//                for (i in it.indices)
-//                    for (j in deviceList.indices) {
-//                        if (it[i].beaconMacId.equals(deviceList[j].deviceMACId, false)) {
-//                            beaconList.add(it[i])
-//                        }
-//                    }
-//            }
-//        }
-//        if (beaconList.isNotEmpty())
-            scanBeaconRecyclerView.adapter = ScannedBeaconAdapter(this, it)
+        val beaconList: ArrayList<MeterBeacon> = ArrayList()
+        Log.i("@Scan","meterbecon=====>"+it.toString())
+        for(i in deviceListResponse){
+            Log.i("@Scan","mac id=====>"+i.deviceMACId)
+        }
+        if (it!!.isNotEmpty()) {
+            if (deviceListResponse.isNotEmpty()) {
+                Log.i("@Scan","deviceList=====>"+deviceListResponse.toString())
+                for (i in it.indices)
+                    for (j in deviceListResponse.indices) {
+                        if (it[i].beaconMacId.equals(deviceListResponse[j].deviceMACId, false)) {
+                            beaconList.add(it[i])
+                        }
+                    }
+            }
+        }
+        if (beaconList.isNotEmpty())
+            scanBeaconRecyclerView.adapter = ScannedBeaconAdapter(this, beaconList)
     }
 
     private fun handleStatus(it: Status?) {
@@ -256,6 +264,14 @@ class ScanBeaconActivity : BaseActivity() {
             }
             is SaveBeaconData ->{
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            }
+
+            is DeviceList -> {
+
+                    deviceListResponse = it.list
+                   // Log.i("@Device","device list =====>"+item.toString())
+
+
             }
         }
     }

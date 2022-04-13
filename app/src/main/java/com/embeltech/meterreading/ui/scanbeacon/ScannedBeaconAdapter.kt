@@ -42,10 +42,10 @@ class ScannedBeaconAdapter(
             holder.txtBeaconName.text = beacon.beaconName
             holder.txtBeaconMacId.text = beacon.beaconMacId
 
-            holder.linearBeacon.setOnClickListener {
-            RxBus.publish(RxBus.SUBJECT_SCANNED_BEACON_SELECTED, beacon)
+       //     holder.linearBeacon.setOnClickListener {
+       //     RxBus.publish(RxBus.SUBJECT_SCANNED_BEACON_SELECTED, beacon)
 
-            }
+       //     }
         }
     }
 
