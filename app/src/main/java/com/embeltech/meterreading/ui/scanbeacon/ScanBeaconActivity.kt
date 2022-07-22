@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +25,7 @@ import com.embeltech.meterreading.ui.device.model.Device
 import com.embeltech.meterreading.ui.device.model.DeviceListResponse
 import com.embeltech.meterreading.ui.home.HomeActivity
 import com.embeltech.meterreading.ui.scanbeacon.model.BeaconPayload
+import com.embeltech.meterreading.ui.scanbeacon.model.DeviceListByUserResponse
 import com.embeltech.meterreading.utils.DialogUtils
 import com.embeltech.meterreading.utils.Utility
 import com.google.android.material.snackbar.Snackbar
@@ -51,7 +53,8 @@ class ScanBeaconActivity : BaseActivity() {
     private var deviceList: List<Device> = ArrayList()
     private var deviceListResponse: List<DeviceListResponse> = ArrayList()
     private val requests : List<BeaconPayload> = ArrayList()
-
+    private var deviceListByUser:Int = 0
+    private lateinit var scanTxtDevices : TextView
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,26 +68,31 @@ class ScanBeaconActivity : BaseActivity() {
         scannedBeaconViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(ScannedBeaconViewModel::class.java)
 
-       // scannedBeaconViewModel.getAllDevices()
+        scannedBeaconViewModel.getDeviceListByUser()
         scannedBeaconViewModel.getAllLiveDevices()
         scannedBeaconViewModel.getStatus().observe(this, {
             handleStatus(it)
         })
 
         scannedBeaconViewModel.scanResult.observe(this, {
+            Toast.makeText(this, "Scanning ...", Toast.LENGTH_LONG).show()
+            scanTxtDevices.text="Scanning ..."
             setBeaconListToUI(it)
         })
         registerBeaconSelectedObserver()
         swipeRefreshLayout.setOnRefreshListener {
-            Utility.showLoadingDialog(this,"Scanning ...")
+            Toast.makeText(this, "Scanning ...", Toast.LENGTH_LONG).show()
             scannedBeaconViewModel.scanBLE(this)
         }
 
         fab.setOnClickListener {
+            Toast.makeText(this, "Scanning ...", Toast.LENGTH_SHORT).show()
             scannedBeaconViewModel.scanBLE(this)
         }
         checkPermissions()
+        Toast.makeText(this, "Scanning ...", Toast.LENGTH_LONG).show()
         scannedBeaconViewModel.scanBLE(this)
+
         //checkRecord()
     }
 
@@ -213,8 +221,15 @@ class ScanBeaconActivity : BaseActivity() {
                     }
             }
         }
-        if (beaconList.isNotEmpty())
+        if (beaconList.isNotEmpty()) {
+            scanTxtDevices.text=""+deviceListByUser+" Out of "+beaconList.size+" Beacon Device Found."
+            //Toast.makeText(this, ""+deviceListByUser+" Out of "+beaconList.size+" Beacon Device Found.", Toast.LENGTH_SHORT).show()
             scanBeaconRecyclerView.adapter = ScannedBeaconAdapter(this, beaconList)
+        }
+        else{
+            scanTxtDevices.text = ""+deviceListByUser+"out of"+" 0 Device Found, Please try again."
+           // Toast.makeText(this, ""+deviceListByUser+"out of"+" 0 Device Found, Please try again.", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun handleStatus(it: Status?) {
@@ -251,7 +266,7 @@ class ScanBeaconActivity : BaseActivity() {
                             "Connection Successful.",
                             Snackbar.LENGTH_LONG
                         )
-                        gotoHomeScreen()
+                       // gotoHomeScreen()
                     }
                 }
             }
@@ -272,6 +287,9 @@ class ScanBeaconActivity : BaseActivity() {
                    // Log.i("@Device","device list =====>"+item.toString())
 
 
+            }
+            is GetDeviceListByUser ->{
+                deviceListByUser=it.deviceListByUser.notScanedMeters!!
             }
         }
     }

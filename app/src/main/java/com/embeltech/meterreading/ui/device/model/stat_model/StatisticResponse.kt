@@ -23,6 +23,21 @@ data class StatisticResponsesItem(
 	val deviceOrBeaconName: String? = null,
 
 	@field:SerializedName("batteryPercentage")
-	val batteryPercentage: String? = null
+	val batteryPercentage: Any? = null
+
+//	@field:SerializedName("pluseCount")
+//	val pluseCount: Double? = null,
+//
+//	@field:SerializedName("literPerPulse")
+//	val literPerPulse: Double? = null,
+//
+//	@field:SerializedName("macAddress")
+//	val macAddress: String? = null,
+//
+//	@field:SerializedName("deviceOrBeaconName")
+//	val deviceOrBeaconName: String? = null,
+//
+//	@field:SerializedName("batteryPercentage")
+//	val batteryPercentage: String? = null
 
 )

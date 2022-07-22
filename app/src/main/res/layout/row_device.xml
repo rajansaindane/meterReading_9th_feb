@@ -91,6 +91,8 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:ems="10"
+                android:singleLine="true"
                 android:textStyle="normal" />
         </RelativeLayout>
 

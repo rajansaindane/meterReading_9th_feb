@@ -1,15 +1,19 @@
 package com.embeltech.meterreading.data.api
 
+import com.embeltech.meterreading.issues.IssueGetResponse
+import com.embeltech.meterreading.issues.IssueGetResponseItem
 import com.embeltech.meterreading.ui.adduser.SignUpRequest
 import com.embeltech.meterreading.ui.billing.model.DeviceDataDetail
 import com.embeltech.meterreading.ui.billing.model.DeviceDetailsResponse
 import com.embeltech.meterreading.ui.device.model.*
+import com.embeltech.meterreading.ui.device.model.newScreens.*
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
 import com.embeltech.meterreading.ui.device.model.stat_model.TotalConsumptionResponse
 import com.embeltech.meterreading.ui.login.model.LoginResponse
 import com.embeltech.meterreading.ui.report.model.ReportResponse
 import com.embeltech.meterreading.ui.report.model.ReportResponseItem
 import com.embeltech.meterreading.ui.scanbeacon.model.BeaconPayload
+import com.embeltech.meterreading.ui.scanbeacon.model.DeviceListByUserResponse
 import com.embeltech.meterreading.ui.statistics.model.StatisticResponseItem
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -137,15 +141,28 @@ interface BIService {
         @Query("role") role: String
     ): Observable<List<StatisticResponseItem>>
 
-    @GET("blepayload/get-payload-duration-for-statistics")
+    //@GET("blepayload/get-payload-duration-for-statistics")
+    @GET("devicedetail/getBlePaylod-Duration-for-Statiestic-DeviceWise")
     fun getStatisticData(
         @Header("Authorization") token: String,
         @Query("duration") duration: String,
-        @Query("fromDate") fromDate: String,
-        @Query("toDate") toDate: String,
         @Query("fkUserId") fkUserId: Long,
-        @Query("role") role: String
+        @Query("role") role: String,
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String
     ): Observable<List<StatisticResponsesItem>>
+
+    //@GET("blepayload/get-payload-duration-for-statistics")
+    @GET("devicedetail/getBlePaylod-Duration-for-Statiestic-DeviceWise")
+    fun getStatisticDataTest(
+        @Header("Authorization") token: String,
+        @Query("duration") duration: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String,
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String
+    ): Observable<List<ResponseNewStatisticsItem>>
+
 
     @GET("billing/get_device_details_against_amr_id_for_ble")
     fun getDeviceDetails(
@@ -175,4 +192,70 @@ interface BIService {
         @Query("fkUserId") fkUserId: Long,
         @Query("role") role: String
     ): Observable<List<ReportResponseItem>>
+
+    //New screens
+    @GET("user/get-alladmin-list")
+    fun getDashboardAdminList(
+        @Header("Authorization") accessToken: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<List<ResponseAdminListItem>>
+
+    @GET("user/get-user_list")
+    fun getDashboardUserList(
+        @Header("Authorization") accessToken: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<List<ResponseUserListItem>>
+
+    @GET("Dashbord/get-All-Alert-count")
+    fun getDashboardAlertCount(
+        @Header("Authorization") accessToken: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<ResponseAlertCount>
+
+    @GET("device/getDeviceListRolewise")
+    fun getDashboardDeviceList(
+        @Header("Authorization") accessToken: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<List<ResponseDeviceListItem>>
+
+    @GET("blepayload/get-blepayload-totalConsumptionbetweendate")
+    fun getTotalizerData(
+        @Header("Authorization") token: String,
+        @Query("duration") duration: String,
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<ResponseTotalizer>
+
+    @POST("/iotmeter/users/forgot-password")
+    fun getForgotPassword(
+        @Query("email") email: String
+    ): Observable<String>
+
+    ///blepayload/get-blepayload-consumption-devicewise
+    @GET("/iotmeter/blepayload/get-blepayload-consumption-devicewise")
+    fun getDeviceConsumption(
+        @Header("Authorization") token: String,
+        @Query("deviceName") deviceName: String
+    ): Observable<ResponseDeviceConsumption>
+
+    @GET("/iotmeter/issue/getallList")
+    fun getIssueList(
+        @Header("Authorization") token: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<List<IssueGetResponseItem>>
+
+    ///BlePayload/get-all-Scaned-ble-paylod-Count
+    @GET("/iotmeter/BlePayload/get-all-Scaned-ble-paylod-Count")
+    fun getDeviceListByUser(
+        @Header("Authorization") token: String,
+        @Query("fkUserId") fkUserId: Long,
+        @Query("role") role: String
+    ): Observable<DeviceListByUserResponse>
 }

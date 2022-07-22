@@ -6,10 +6,7 @@ import com.embeltech.meterreading.config.Constants
 import com.embeltech.meterreading.data.preferences.AppPreferences
 import com.embeltech.meterreading.data.repository.BIRepository
 import com.embeltech.meterreading.extensions.addToCompositeDisposable
-import com.embeltech.meterreading.livedata.Failed
-import com.embeltech.meterreading.livedata.LoginSuccess
-import com.embeltech.meterreading.livedata.ShowProgressDialog
-import com.embeltech.meterreading.livedata.Status
+import com.embeltech.meterreading.livedata.*
 import com.embeltech.meterreading.ui.BaseViewModel
 import com.embeltech.meterreading.ui.login.model.LoginResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -54,4 +51,24 @@ class LoginViewModel @Inject constructor(private val repository: BIRepository) :
         appPreferences.saveUserRole(it.perList[0].role)
         appPreferences.saveUserName("${it.perList[0].firstname} ${it.perList[0].lastname}")
     }
+
+    fun getForgotPassword( email: String) {
+        repository.getForgotPassword(email)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { status.value = ShowProgressDialog(Constants.Progress.SHOW_PROGRESS) }
+            .subscribe({
+                Log.i("@Login","succ===>"+it)
+                status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+
+                    status.value = GetForgotPassword(it!!)
+
+
+            }, {
+                Log.i("@Login","error===>"+it)
+                status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+                status.value = Failed(it.message!!)
+            }).addToCompositeDisposable(disposable)
+    }
+
 }

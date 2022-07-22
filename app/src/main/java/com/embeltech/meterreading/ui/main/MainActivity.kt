@@ -46,18 +46,31 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_devices, R.id.nav_report,R.id.nav_add_user, R.id.nav_billing, R.id.nav_statistics,R.id.nav_logout
+                R.id.nav_devices, R.id.nav_report,R.id.nav_device,R.id.nav_add_user, R.id.nav_billing,R.id.nav_issue, R.id.nav_statistics,R.id.nav_logout
             ), drawerLayout
         )
 
         val role = appPreferences.getUserRole()!!
         val menus = navView.menu
-        if (role.equals("super-admin")) {
-            menus.findItem(R.id.nav_billing).isVisible = true
-            menus.findItem(R.id.nav_add_user).isVisible = true
-        } else if (role.equals("user") || role.equals("admin")) {
-            menus.findItem(R.id.nav_billing).isVisible = false
-            menus.findItem(R.id.nav_add_user).isVisible = false
+        Log.i("@main", "role============>$role")
+        when (role) {
+            "super-admin" -> {
+                menus.findItem(R.id.nav_billing).isVisible = true
+                menus.findItem(R.id.nav_add_user).isVisible = true
+            }
+            "user" -> {
+                menus.findItem(R.id.nav_billing).isVisible = false
+                menus.findItem(R.id.nav_add_user).isVisible = false
+                menus.findItem(R.id.nav_issue).isVisible = false
+            }
+//            "admin" -> {
+//                menus.findItem(R.id.nav_billing).isVisible = false
+//                menus.findItem(R.id.nav_add_user).isVisible = false
+//            }
+
+            // Log.i("@main","==========>"+userName.text.toString())
+            // userName.text = appPreferences.getUserName()
+            // setNavigationViewListener()
         }
         val header=navView.getHeaderView(0)
         header.findViewById<AppCompatTextView>(R.id.userNameNavView).setText(appPreferences.getUserName()+"\n"+appPreferences.getUserRole()!!.toUpperCase())

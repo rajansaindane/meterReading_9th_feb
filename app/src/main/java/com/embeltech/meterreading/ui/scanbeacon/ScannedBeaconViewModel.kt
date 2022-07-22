@@ -122,7 +122,7 @@ class ScannedBeaconViewModel @Inject constructor(private val repository: BIRepos
 
             }, {
                 Toast.makeText(scanBeaconActivity, "Total Beacon Devices Scan : "+beaconList.size, Toast.LENGTH_SHORT).show()
-                Toast.makeText(scanBeaconActivity, "Scanning completed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(scanBeaconActivity, "Scanning completed", Toast.LENGTH_LONG).show()
                 Utility.cancelLoading()
                 it.printStackTrace()
                 Timber.e("Scanned beacon exception is " + it.message)
@@ -229,6 +229,26 @@ class ScannedBeaconViewModel @Inject constructor(private val repository: BIRepos
 
                 status.value = Failed(it.message!!)
                 status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+            }).addToCompositeDisposable(disposable)
+    }
+
+    fun getDeviceListByUser() {
+        repository.getDeviceListByUser(
+            appPreferences.getToken()!!,
+            appPreferences.getUserId(),
+            appPreferences.getUserRole()!!
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { status.value = ShowProgressDialog(Constants.Progress.SHOW_PROGRESS) }
+            .subscribe({
+                status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+                status.value=GetDeviceListByUser(it)
+                Log.i("@Scan","device by user list =====>"+it.toString())
+
+            }, {
+                Log.i("@Scan","failed device by user list =====>"+it!!.message)
+                status.value = ShowProgressDialog(Constants.Progress.HIDE_PROGRESS)
+                status.value = Failed(it.message!!)
             }).addToCompositeDisposable(disposable)
     }
 

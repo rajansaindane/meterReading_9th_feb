@@ -6,16 +6,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_devices"
-            android:title="@string/menu_devices" />
+            android:title="@string/dashboard" />
         <item
             android:id="@+id/nav_report"
             android:title="@string/menu_report" />
+        <item
+            android:id="@+id/nav_device"
+            android:title="@string/deviceList" />
         <item
             android:id="@+id/nav_add_user"
             android:title="@string/addUser" />
         <item
             android:id="@+id/nav_billing"
             android:title="@string/billing" />
+        <item
+            android:id="@+id/nav_issue"
+            android:title="@string/issue" />
         <item
             android:id="@+id/nav_statistics"
             android:title="@string/contactUs" />

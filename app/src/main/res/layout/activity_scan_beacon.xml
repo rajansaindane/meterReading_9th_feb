@@ -32,4 +32,14 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_refresh" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/scanTxtDevices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scanning..."
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        ></androidx.appcompat.widget.AppCompatTextView>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

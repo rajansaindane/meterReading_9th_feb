@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_devices"
         android:name="com.embeltech.meterreading.ui.device.DeviceDetailsFragment"
-        android:label="@string/menu_devices"
+        android:label="@string/dashboard"
         tools:layout="@layout/fragment_home" />
 
     <fragment
@@ -19,15 +19,22 @@
 
     <fragment
         android:id="@+id/nav_add_user"
-        android:name="com.embeltech.meterreading.ui.adduser.AddUserFragment"
+        android:name="com.embeltech.meterreading.ui.adduser.UserListFragment"
         android:label="@string/addUser"
-        tools:layout="@layout/add_user_fragment" />
+        tools:layout="@layout/fragment_user_list" />
 
     <fragment
         android:id="@+id/nav_billing"
         android:name="com.embeltech.meterreading.ui.billing.BillingFragment"
         android:label="@string/billing"
         tools:layout="@layout/fragment_billing" />
+
+    <fragment
+        android:id="@+id/nav_issue"
+        android:name="com.embeltech.meterreading.issues.IssuesFragment"
+        android:label="@string/issue"
+        tools:layout="@layout/fragment_issues" />
+
 
     <fragment
         android:id="@+id/nav_statistics"
@@ -41,5 +48,10 @@
         android:label="Logout"
         tools:layout="@layout/activity_stat" />
 
+    <fragment
+        android:id="@+id/nav_device"
+        android:name="com.embeltech.meterreading.ui.device.DeviceListFragment"
+        android:label="@string/deviceList"
+        tools:layout="@layout/fragment_device_list" />
 
 </navigation>

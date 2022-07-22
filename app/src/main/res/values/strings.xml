@@ -73,6 +73,8 @@
     <string name="device_location">Enter customer device Location</string>
     <string name="customer_name">Enter customer name</string>
     <string name="create_device">Create Device</string>
+    <string name="Device_List">Device List</string>
+    <string name="User_List">User List</string>
     <string name="meterStartReading">Meter Start Reading</string>
     <string name="device_type">Device Type</string>
     <string name="device_metadata">Device Metadata</string>
@@ -158,6 +160,8 @@
     <string name="contactUs">Contact Us</string>
     <string name="logout">logout</string>
     <string name="addUser">Add User</string>
+    <string name="deviceList">Devices</string>
+    <string name="userList">User List</string>
     <string name="firstname">Firstname</string>
     <string name="lastname">Lastname</string>
     <string name="email">Email</string>
@@ -166,4 +170,14 @@
     <string name="role">Role</string>
     <string name="username">Username</string>
     <string name="deviceType">DeviceType</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="issue">Issues</string>
+    <string name="dashboard">Dashboard</string>
+
+    <string-array name="duration">
+        <item>Select Option</item>
+        <item>Last Week</item>
+        <item>Last Month</item>
+        <item>Custom</item>
+    </string-array>
 </resources>

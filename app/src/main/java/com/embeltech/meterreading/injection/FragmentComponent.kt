@@ -3,9 +3,12 @@ package com.embeltech.meterreading.injection
 
 import com.embeltech.meterreading.injection.annotations.PerActivity
 import com.embeltech.meterreading.injection.module.FragmentModule
+import com.embeltech.meterreading.issues.IssuesFragment
 import com.embeltech.meterreading.ui.adduser.AddUserFragment
+import com.embeltech.meterreading.ui.adduser.UserListFragment
 import com.embeltech.meterreading.ui.billing.BillingFragment
 import com.embeltech.meterreading.ui.device.DeviceDetailsFragment
+import com.embeltech.meterreading.ui.device.DeviceListFragment
 import com.embeltech.meterreading.ui.statistics.GraphFragment
 import com.embeltech.meterreading.ui.report.ReportFragment
 import dagger.Subcomponent
@@ -18,5 +21,8 @@ interface FragmentComponent {
     fun inject(billingFragment: BillingFragment)
     fun inject(graphFragment: GraphFragment)
     fun inject(addUserFragment: AddUserFragment)
+    fun inject(userListFragment: UserListFragment)
+    fun inject(deviceListFragment: DeviceListFragment)
+    fun inject(issuesFragment: IssuesFragment)
 
 }

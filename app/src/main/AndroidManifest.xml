@@ -31,7 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeterReading"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.adduser.AddUserActivity"></activity>
+        <activity android:name=".ui.adduser.UserListingActivity"></activity>
+        <!-- <activity android:name=".ui.adduser.AddUserActivity" /> -->
         <activity android:name=".ui.report.StatActivity" />
         <activity
             android:name=".ui.main.MainActivity"
@@ -75,6 +76,10 @@
             android:label="@string/title_activity_scan_beacon"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeterReading.NoActionBar" />
+        <activity
+            android:name=".ui.device.DeviceListingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"

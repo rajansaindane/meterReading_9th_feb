@@ -4,16 +4,20 @@ import com.embeltech.meterreading.data.api.BIService
 import com.embeltech.meterreading.data.database.model.MeterBeacon
 import com.embeltech.meterreading.data.preferences.AppPreferences
 import com.embeltech.meterreading.data.repository.BIDataSource
+import com.embeltech.meterreading.issues.IssueGetResponse
+import com.embeltech.meterreading.issues.IssueGetResponseItem
 import com.embeltech.meterreading.ui.adduser.SignUpRequest
 import com.embeltech.meterreading.ui.billing.model.DeviceDataDetail
 import com.embeltech.meterreading.ui.billing.model.DeviceDetailsResponse
 import com.embeltech.meterreading.ui.device.model.*
+import com.embeltech.meterreading.ui.device.model.newScreens.*
 import com.embeltech.meterreading.ui.device.model.stat_model.StatisticResponsesItem
 import com.embeltech.meterreading.ui.device.model.stat_model.TotalConsumptionResponse
 import com.embeltech.meterreading.ui.login.model.LoginResponse
 import com.embeltech.meterreading.ui.report.model.ReportResponse
 import com.embeltech.meterreading.ui.report.model.ReportResponseItem
 import com.embeltech.meterreading.ui.scanbeacon.model.BeaconPayload
+import com.embeltech.meterreading.ui.scanbeacon.model.DeviceListByUserResponse
 import com.embeltech.meterreading.ui.statistics.model.StatisticResponseItem
 import com.google.gson.Gson
 import io.reactivex.Completable
@@ -181,12 +185,24 @@ class BIRemoteDataSource @Inject constructor(private var bIService: BIService) :
     override fun getStatisticResponseData(
         token: String,
         duration: String,
-        fromDate: String,
-        toDate: String,
+
         fkUserId: Long,
-        role: String
+        role: String,
+        fromDate: String,
+        toDate: String
     ): Observable<List<StatisticResponsesItem>> {
-        return bIService.getStatisticData(token, duration, fromDate, toDate, fkUserId, role)
+        return bIService.getStatisticData(token, duration,  fkUserId, role,fromDate, toDate)
+    }
+
+    override fun getStatisticResponseDataTest(
+        token: String,
+        duration: String,
+        fkUserId: Long,
+        role: String,
+        fromDate: String,
+        toDate: String
+    ): Observable<List<ResponseNewStatisticsItem>> {
+        return bIService.getStatisticDataTest(token, duration, fkUserId, role, fromDate, toDate)
     }
 
     override fun getDeviceDetails(
@@ -218,6 +234,75 @@ class BIRemoteDataSource @Inject constructor(private var bIService: BIService) :
         role: String
     ): Observable<List<ReportResponseItem>> {
         return bIService.getDurationReport(token, duration, fkUserId, role)
+    }
+
+    override fun getDashboardAdminList(
+        token: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<List<ResponseAdminListItem>> {
+       return bIService.getDashboardAdminList(token,fkUserId, role)
+    }
+
+    override fun getDashboardUserList(
+        token: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<List<ResponseUserListItem>> {
+        return bIService.getDashboardUserList(token,fkUserId, role)
+    }
+
+    override fun getDashboardAlertCount(
+        token: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<ResponseAlertCount> {
+        return  bIService.getDashboardAlertCount(token,fkUserId, role)
+    }
+
+    override fun getDashboardDeviceList(
+        token: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<List<ResponseDeviceListItem>> {
+        return bIService.getDashboardDeviceList(token,fkUserId, role)
+    }
+
+    override fun getTotalizerData(
+        token: String,
+        duration: String,
+        fromDate: String,
+        toDate: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<ResponseTotalizer> {
+        return  bIService.getTotalizerData(token, duration, fromDate, toDate, fkUserId, role)
+    }
+
+    override fun getForgotPassword(email: String): Observable<String> {
+        return bIService.getForgotPassword(email)
+    }
+
+    override fun getDeviceConsumption(token: String,
+                                      deviceName: String):
+            Observable<ResponseDeviceConsumption> {
+        return bIService.getDeviceConsumption(token,deviceName)
+    }
+
+    override fun getIssueList(
+        token: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<List<IssueGetResponseItem>> {
+       return bIService.getIssueList(token, fkUserId, role)
+    }
+
+    override fun getDeviceListByUser(
+        token: String,
+        fkUserId: Long,
+        role: String
+    ): Observable<DeviceListByUserResponse> {
+        return bIService.getDeviceListByUser(token, fkUserId, role)
     }
 
 

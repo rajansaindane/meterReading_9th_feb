@@ -63,59 +63,139 @@
         app:layout_constraintStart_toEndOf="@+id/btnLastMonth"
         app:layout_constraintTop_toBottomOf="@+id/txtStartDate" />
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/button_bg"
-        android:stretchColumns="1,2,3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGenerate">
+<!--    <TableLayout-->
+<!--        android:id="@+id/tableLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:background="@color/button_bg"-->
+<!--        android:stretchColumns="1,2,3"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnGenerate">-->
 
-        <TableRow>
-
-            <TextView
-                android:textColor="@color/white"
-                android:layout_column="1"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="MacId"
-                android:ems="6"
-                android:textStyle="bold"
-                android:layout_marginStart="8dp"/>
-
-            <TextView
-                android:textColor="@color/white"
-                android:layout_column="1"
-                android:gravity="center"
-                android:text="Username"
-                android:textStyle="bold"
-                android:layout_marginStart="24dp"
-
-                />
-
-            <TextView
-                android:textColor="@color/white"
-                android:layout_column="1"
-                android:gravity="center"
-                android:text="Consumption"
-                android:textStyle="bold"
-                android:layout_marginStart="16dp"
-                />
+<!--        <TableRow>-->
 
 <!--            <TextView-->
 <!--                android:textColor="@color/white"-->
 <!--                android:layout_column="1"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="8dp"-->
-<!--                android:text="Rssi"-->
+<!--                android:gravity="start"-->
+<!--                android:padding="4dp"-->
+<!--                android:text="MacId"-->
+<!--                android:ems="5"-->
+<!--                android:textSize="11sp"-->
 <!--                android:textStyle="bold"-->
+<!--                android:layout_marginStart="4dp"/>-->
+
+<!--            <TextView-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_column="1"-->
+<!--                android:gravity="start"-->
+<!--                android:text="Username"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="11sp"-->
+<!--                android:layout_marginStart="11dp"-->
 
 <!--                />-->
+
+<!--            <TextView-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_column="1"-->
+<!--                android:gravity="start"-->
+<!--                android:text="Consumption"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="11sp"-->
+<!--                android:layout_marginStart="12dp"-->
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_column="1"-->
+<!--                android:gravity="start"-->
+<!--                android:text="Date"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="11sp"-->
+<!--                android:layout_marginStart="12dp"-->
+
+<!--                />-->
+<!--        </TableRow>-->
+
+
+<!--    </TableLayout>-->
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGenerate"
+        android:stretchColumns="1,2,3">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/table_macId"
+                android:layout_column="1"
+                android:gravity="start"
+                android:padding="6dp"
+                android:ems="6"
+                android:textStyle="bold"
+                android:text="              MacId"
+                android:textColor="@color/white"
+                android:background="@color/button_bg"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/table_username"
+                android:layout_column="1"
+                android:gravity="start"
+                android:padding="6dp"
+                android:ems="2"
+                android:text="    Username"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@color/button_bg"
+                android:textSize="10dp"
+
+
+                />
+
+            <TextView
+                android:id="@+id/table_pulse"
+                android:layout_column="1"
+                android:gravity="start"
+                android:padding="6dp"
+                android:ems="4"
+                android:background="@color/button_bg"
+                android:textSize="10dp"
+                android:text="        Consumption"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+
+                />
+
+            <TextView
+                android:id="@+id/table_date_time"
+                android:layout_column="1"
+                android:gravity="start"
+                android:padding="6dp"
+                android:ems="6"
+                android:textSize="10dp"
+                android:text="        Date"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@color/button_bg"
+
+
+
+                />
+
         </TableRow>
 
 
@@ -125,8 +205,6 @@
         android:id="@+id/recyclerTableView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

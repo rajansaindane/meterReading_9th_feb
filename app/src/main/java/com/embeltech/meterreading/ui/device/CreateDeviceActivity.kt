@@ -46,6 +46,7 @@ class CreateDeviceActivity : BaseActivity() {
     private var isEdit: Boolean = false
     private var isUpdate: Boolean = false
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

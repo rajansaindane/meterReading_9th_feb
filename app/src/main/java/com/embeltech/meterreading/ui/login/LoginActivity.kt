@@ -1,8 +1,16 @@
 package com.embeltech.meterreading.ui.login
 
+import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
@@ -11,14 +19,12 @@ import com.embeltech.meterreading.config.BaseActivity
 import com.embeltech.meterreading.config.Constants
 import com.embeltech.meterreading.data.preferences.AppPreferences
 import com.embeltech.meterreading.extensions.hideSoftKey
-import com.embeltech.meterreading.livedata.Failed
-import com.embeltech.meterreading.livedata.LoginSuccess
-import com.embeltech.meterreading.livedata.ShowProgressDialog
-import com.embeltech.meterreading.livedata.Status
+import com.embeltech.meterreading.livedata.*
 import com.embeltech.meterreading.ui.main.MainActivity
 import com.embeltech.meterreading.utils.DialogUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity() {
@@ -64,7 +70,36 @@ class LoginActivity : BaseActivity() {
                 )
             }
         }
+        txtForgotPassword.setOnClickListener {
+            forgotPassword()
+        }
     }
+
+    private fun forgotPassword() {
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            //dialog.setCancelable(false)
+            dialog.setContentView(R.layout.dialog_forgot_password)
+            val btnSubmit = dialog.findViewById(R.id.btnForgotSubmit) as Button
+            val btnCancel = dialog.findViewById(R.id.btnForgotCancel) as Button
+            val edtForgotEmail = dialog.findViewById(R.id.edtForgotEmail) as EditText
+
+
+            btnSubmit.setOnClickListener {
+                if (!edtForgotEmail.text.toString().isNullOrEmpty()
+                    && !edtForgotEmail.text.toString().isNullOrEmpty()){
+                    loginViewModel.getForgotPassword(edtForgotEmail.text.toString())
+                    dialog.dismiss()
+                }
+            }
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+
 
     private fun handleStatus(it: Status?) {
         when (it) {
@@ -85,6 +120,9 @@ class LoginActivity : BaseActivity() {
                 Log.i("@Login","error===>"+it.error)
                 if (it.error.contains("404"))
                     DialogUtils.showOkAlert(this, "Meter Reading", "User not found.")
+            }
+            is GetForgotPassword -> {
+                Toast.makeText(this, "RESET LINK SUBMITTED SUCCESSFULLY", Toast.LENGTH_SHORT).show()
             }
         }
     }

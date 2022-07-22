@@ -2,7 +2,9 @@ package com.embeltech.meterreading.injection
 
 import com.embeltech.meterreading.injection.annotations.PerActivity
 import com.embeltech.meterreading.injection.module.ActivityModule
+import com.embeltech.meterreading.ui.adduser.UserListingActivity
 import com.embeltech.meterreading.ui.device.CreateDeviceActivity
+import com.embeltech.meterreading.ui.device.DeviceListingActivity
 import com.embeltech.meterreading.ui.home.HomeActivity
 import com.embeltech.meterreading.ui.login.LoginActivity
 import com.embeltech.meterreading.ui.scanbeacon.ScanBeaconActivity
@@ -18,4 +20,6 @@ interface ActivityComponent {
     fun inject(loginActivity: LoginActivity)
     fun inject(createDeviceActivity: CreateDeviceActivity)
     fun inject(mainActivity: MainActivity)
+    fun inject(deviceListingActivity: DeviceListingActivity)
+    fun inject(userListingActivity: UserListingActivity)
 }

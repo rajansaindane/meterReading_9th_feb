@@ -9,21 +9,21 @@
         <TextView
             android:id="@+id/table_macId"
             android:layout_column="1"
-            android:gravity="center"
-            android:padding="8dp"
-            android:ems="7"
+            android:gravity="start"
+            android:padding="6dp"
+            android:ems="6"
             android:background="@drawable/cell_shape"
-            android:textSize="14dp"
+            android:textSize="10dp"
              />
 
         <TextView
             android:id="@+id/table_username"
             android:layout_column="1"
-            android:gravity="center"
-            android:padding="8dp"
-            android:ems="3"
+            android:gravity="start"
+            android:padding="6dp"
+            android:ems="2"
             android:background="@drawable/cell_shape"
-            android:textSize="14dp"
+            android:textSize="10dp"
 
 
             />
@@ -31,11 +31,23 @@
         <TextView
             android:id="@+id/table_pulse"
             android:layout_column="1"
-            android:gravity="center"
-            android:padding="8dp"
-            android:ems="5"
+            android:gravity="start"
+            android:padding="6dp"
+            android:ems="4"
             android:background="@drawable/cell_shape"
-            android:textSize="14dp"
+            android:textSize="10dp"
+
+
+            />
+
+        <TextView
+            android:id="@+id/table_date_time"
+            android:layout_column="1"
+            android:gravity="start"
+            android:padding="6dp"
+            android:ems="6"
+            android:background="@drawable/cell_shape"
+            android:textSize="10dp"
 
 
             />

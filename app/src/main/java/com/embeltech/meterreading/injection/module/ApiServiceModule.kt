@@ -121,7 +121,7 @@ class ApiServiceModule {
     }
 
     companion object {
-        private const val BASE_URL = "http://65.1.68.67:8080/iotmeter/"
+        private const val BASE_URL = "http://44.205.50.168:8080/iotmeter/"
     }
 
     /* Specific services */

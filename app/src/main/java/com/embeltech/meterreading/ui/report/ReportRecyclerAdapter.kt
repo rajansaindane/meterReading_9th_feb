@@ -26,9 +26,10 @@ private val reportItems: List<ReportResponseItem>?
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val report = reportItems!![position]
         if (holder is ReportRecyclerVH){
-            holder.macId.text=report.macAddress!!.trim()
-            holder.username.text=report.beaconNname!!.trim()
-            holder.pulse.text=report.pluseCount!!.trim()+"Ltr"
+            holder.macId.text=report.macAddress!!.trim()+"\n"
+            holder.username.text=report.beaconNname!!.trim()+"\n"
+            holder.pulse.text=report.pluseCount!!.trim()+"Ltr"+"\n"
+            holder.dateTime.text=report.date+","+report.time
         }
     }
 
@@ -36,6 +37,7 @@ private val reportItems: List<ReportResponseItem>?
         var macId: TextView = itemView.table_macId
         var username: TextView = itemView.table_username
         var pulse: TextView = itemView.table_pulse
+        var dateTime: TextView = itemView.table_date_time
     }
 
 }
